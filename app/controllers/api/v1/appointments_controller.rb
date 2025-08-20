@@ -4,8 +4,16 @@ class Api::V1::AppointmentsController < ApplicationController
 
   # GET /api/v1/appointments
   def index
-    @appointments = @current_user.appointments.order(start_time: :asc)
-    render json: @appointments
+    result = AppointmentsListService.new(@current_user, params).call
+
+    if result.success?
+      render json: {
+        data: result.data,
+        pagination: pagy_metadata(result.pagination),
+      }, status: :ok
+    else
+      render json: { error: result.error }, status: :unprocessable_content
+    end
   end
 
   # POST /api/v1/appointments

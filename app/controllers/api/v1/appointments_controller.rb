@@ -8,8 +8,8 @@ class Api::V1::AppointmentsController < ApplicationController
 
     if result.success?
       render json: {
-        data: result.data,
-        pagination: pagy_metadata(result.pagination),
+        data: AppointmentSerializer.render_many(result.data),
+        pagination: PaginationSerializer.render(result.pagination),
       }, status: :ok
     else
       render json: { error: result.error }, status: :unprocessable_content
@@ -21,7 +21,7 @@ class Api::V1::AppointmentsController < ApplicationController
     result = ScheduleAppointmentService.new(@current_user, appointments_params).call
 
     if result.success?
-      render json: result.data, status: :created
+      render json: AppointmentSerializer.render(result.data), status: :created
     else
       render json: { error: result.error }, status: :unprocessable_content
     end

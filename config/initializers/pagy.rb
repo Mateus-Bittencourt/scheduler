@@ -10,11 +10,13 @@
 # To require an extra, uncomment the line below.
 # You can also require the extras in your models or controllers
 
-# IMPORTANT: Este extra é necessário para a sua API funcionar com o helper `pagy_metadata`
 require 'pagy/extras/metadata'
+require 'pagy/extras/overflow'
 
-# When you are done customizing your pagy initializer,
-# you can safely delete this comment block.
+# :empty_page -> Retorna uma página vazia sem levantar erro.
+# :last_page  -> Retorna a última página válida.
+# :exception  -> Levanta o erro Pagy::OverflowError (default).
+Pagy::DEFAULT[:overflow] = :empty_page
 
 # Set the default items per page
 Pagy::DEFAULT[:items] = 20

@@ -17,12 +17,16 @@ class Appointment < ApplicationRecord
       errors.add(:start_time, "must be at a 30-minute interval (e.g., 09:00, 09:30).")
     end
 
-    unless start_time.hour >= 9 && (start_time + 30.minutes).hour <= 17
+    unless start_time.hour >= 9 && start_time.hour < 17
       errors.add(:start_time, "must be between 09:00 and 16:30.")
     end
 
     if start_time.saturday? || start_time.sunday?
       errors.add(:start_time, "can't be on a weekend.")
+    end
+
+    if start_time < Time.current
+      errors.add(:start_time, "can't be a past time or date")
     end
 
     end_time = start_time + 30.minutes

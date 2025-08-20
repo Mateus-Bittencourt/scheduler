@@ -18,13 +18,12 @@ class Api::V1::AppointmentsController < ApplicationController
 
   # POST /api/v1/appointments
   def create
-    @appointment = @current_user.appointments.new(appointments_params)
+    result = ScheduleAppointmentService.new(@current_user, appointments_params).call
 
-    if @appointment.save
-      render json: @appointment, status: :created
+    if result.success?
+      render json: result.data, status: :created
     else
-      render json: { errors: @appointment.errors.full_messages },
-             status: :unprocessable_entity
+      render json: { error: result.error }, status: :unprocessable_content
     end
   end
 

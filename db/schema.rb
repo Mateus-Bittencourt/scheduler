@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2025_08_19_215452) do
+ActiveRecord::Schema[7.1].define(version: 2025_08_20_135738) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -29,6 +29,7 @@ ActiveRecord::Schema[7.1].define(version: 2025_08_19_215452) do
     t.string "specialty"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "time_zone", default: "UTC", null: false
   end
 
   create_table "users", force: :cascade do |t|

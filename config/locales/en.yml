@@ -31,7 +31,7 @@ en:
   time:
     formats:
       default: "%m/%d/%Y %I:%M %p" # Formato americano completo
-      time_only: "%I:%M %p"        # Apenas a hora
+      time_only: "%I:%M %p" # Apenas a hora
   date:
     formats:
       default: "%m/%d/%Y"

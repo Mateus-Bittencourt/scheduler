@@ -14,7 +14,7 @@ class Appointment < ApplicationRecord
 
     local_start_time = start_time.in_time_zone(professional.time_zone)
 
-    if start_time < Time.current
+    if local_start_time < Time.current
       errors.add(:start_time, "can't be a past time or date")
       return
     end
@@ -27,7 +27,7 @@ class Appointment < ApplicationRecord
       errors.add(:start_time, "must be between 09:00 and 16:30.")
     end
 
-    if local_start_time.saturday? || local_start_time.sunday?
+    if local_start_time.on_weekend?
       errors.add(:start_time, "can't be on a weekend.")
     end
 

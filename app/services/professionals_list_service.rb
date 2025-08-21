@@ -6,9 +6,8 @@ class ProfessionalsListService
   end
 
   def call
-    
     base_scope = Professional.all()
-    debugger
+    
     @pagy = Pagy.new(count: base_scope.count, page: @params[:page])
     @professionals = base_scope.offset(@pagy.offset).limit(@pagy.limit)
 

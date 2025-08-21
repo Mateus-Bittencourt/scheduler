@@ -1,9 +1,10 @@
 class AppointmentSerializer
-  def self.render_many(appointments, time_zone: "UTC")
-    appointments.map { |appointment| render(appointment, time_zone:) }
+  def self.render_many(appointments)
+    appointments.map { |appointment| render(appointment) }
   end
 
-  def self.render(appointment, time_zone: "UTC")
+  def self.render(appointment)
+    time_zone = appointment.professional.time_zone
     local_time = appointment.start_time.in_time_zone(time_zone)
 
     {
@@ -17,6 +18,7 @@ class AppointmentSerializer
       user: {
               name: appointment.user.name,
             },
+      time_zone:
     }
   end
 end

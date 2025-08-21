@@ -1,13 +1,15 @@
 # Scheduling API
 
-## About this project
 
 This project is a backend API for a simple professional appointment scheduling system, developed as a solution to a technical challenge for a U.S.-based wellness startup.
 
 The main goal is to provide a robust and well-structured API that handles the business logic of scheduling, including time constraints, professional availability, and time zone awareness.
 
 
+
+
 ### ✨ Key Features
+
 
 - Appointment Management: Create, list, and cancel appointments for a simulated user.
 
@@ -23,7 +25,10 @@ The main goal is to provide a robust and well-structured API that handles the bu
 - Centralized Error Handling: Provides consistent and predictable error responses for invalid requests or missing resources.
 
 
+
+
 ### 🛠️ Tech Stack
+
 
 - Ruby 3.2+
 
@@ -36,21 +41,31 @@ The main goal is to provide a robust and well-structured API that handles the bu
 - Puma as the web server
 
 
+
+
 #### 🚀 Getting Started
 
+
 Follow these instructions to get the project up and running on your local machine.
+
+
+
 
 ##### Prerequisites
 
 Make sure you have the following installed:
 
-    - Ruby (preferably managed by a version manager like asdf or rvm).
+    - Ruby.
 
     - Bundler gem (gem install bundler).
 
     - PostgreSQL database.
 
+
+
+
 ##### Setup Instructions
+
 
    1. Clone the repository, then enter project folder:
    ```bash
@@ -61,6 +76,9 @@ Make sure you have the following installed:
    ```bash
    bundle install
    ```
+
+
+
 
    3. Configure the database:
    - config/database.yml already provided.
@@ -77,13 +95,20 @@ Make sure you have the following installed:
    rails server
    ```
 
+
+
+
 ### 📖 API Endpoints Documentation
+
 
 The base URL for all endpoints is /api/v1. For simplicity, authentication is not required; the system simulates a current_user.
 
+
 #### Professionals
 
+
 GET /professionals
+
 
 Lists all available professionals.
 
@@ -111,7 +136,9 @@ Lists all available professionals.
 }
    ```
 
+
 #### Appointments
+
 
 GET /appointments
 
@@ -143,7 +170,9 @@ Lists all appointments for the current simulated user, sorted by start time.
 }
    ```
 
+
 POST /appointments
+
 
 Creates a new appointment.
 
@@ -168,7 +197,9 @@ Note: start_time must be in ISO 8601 format and will be validated against the pr
 }
    ```
 
+
 DELETE /appointments/:id
+
 
 - Cancels an appointment for the current user.
 
@@ -180,12 +211,19 @@ DELETE /appointments/:id
 
         - An empty response with a 204 status code.
 
+
+
+
 #### 🏛️ Architectural Decisions
+
+
 
 - Service Objects: Business logic for complex actions (like listing or creating appointments) is encapsulated in service objects (app/services). This keeps controllers thin and focused on handling HTTP requests and responses.
 
 - Serializers: The JSON representation of models is handled by serializer classes (app/serializers). This separates the data model from its presentation layer, making the API responses easier to manage and modify.
 
 - Time Zone Strategy: The application is configured to operate in UTC. All timestamps are stored in UTC in the database. For validations and display, timestamps are converted to the appropriate local time zone (either the professional's or the user's), ensuring correctness and eliminating ambiguity.
+
+
 
 ##### For easier testing, a Postman collection file (.json) containing all API requests is available in the project's root directory.
